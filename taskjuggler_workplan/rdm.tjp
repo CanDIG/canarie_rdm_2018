@@ -1,0 +1,450 @@
+/*
+ * This file contains a project skeleton. It is part of the
+ * TaskJuggler project management tool. You can use this as a basis to
+ * start you own project file.
+ */
+project rdm "RDM"  2018-10-01-0:00--0500 +2y {
+  timezone "America/Toronto"
+  timeformat "%Y-%m-%d"
+  numberformat "-" "" "," "." 1
+  currencyformat "(" ")" "," "." 0
+  now 2018-10-01
+  currency "CAD"
+}
+
+# define some accounts.
+account personnel "Personnel costs" {
+  account bcgsc "BC" {
+    aggregate resources
+  }
+  account cd_bcgsc "CanDIG BC" {
+    aggregate resources
+  }
+  account mugqic "Quebec" {
+    aggregate resources
+  }
+  account hsc "Sick Kids" {
+    aggregate resources
+  }
+  account cd_hsc "CanDIG HSC" {
+    aggregate resources
+  }
+}
+
+account rev "Payments"
+balance personnel rev
+
+
+# The daily default rate of all resources. This can be overridden for each
+# resource. We specify this, so that we can do a good calculation of
+# the costs of the project.
+rate 50.0
+
+# This is a set of example resources.
+resource person_on "ON" {
+  chargeset hsc 100%
+  leaves holiday 2018-12-20 - 2019-01-06
+  efficiency .942   # 3 wks vacation/yr
+}
+resource person_qc "QC" {
+  chargeset mugqic 100%
+  leaves holiday 2018-12-20 - 2019-01-06
+  efficiency .942   # 3 wks vacation/yr
+}
+resource person_bc "BC" {
+  chargeset bcgsc 100%
+  leaves holiday 2018-12-20 - 2019-01-06
+  efficiency .942   # 3 wks vacation/yr
+}
+resource existing_person_on "ON: Existing" {
+  chargeset cd_hsc 100%
+  leaves holiday 2018-12-20 - 2019-01-06
+  efficiency .942   # 3 wks vacation/yr
+}
+resource existing_person_bc "BC: Existing" {
+  chargeset cd_bcgsc 100%
+  leaves holiday 2018-12-20 - 2019-01-06
+  efficiency .942   # 3 wks vacation/yr
+}
+
+task activity1 "Data Publishing" {
+  priority 100
+
+  task be "Production DOS/Minio backend" {
+    effort 60d
+    allocate existing_person_on
+  }
+  task ingest "Data Ingest" {
+    task ingest_valid "Validation lambdas" {
+      effort 40d
+      depends activity1.be
+      allocate person_on
+    }
+    task ingest_vcf_norm "Normalization lambdas - VCF" {
+      depends activity1.ingest.ingest_valid
+      effort 20d
+      allocate person_on
+    }
+    task ingest_fastq_norm "Normalization lambdas - FASTQ" {
+      depends activity1.ingest.ingest_valid
+      effort 10d
+      allocate person_on
+    }
+    task ingest_fastq_qc "QC lambdas - FASTQ" {
+      depends activity1.ingest.ingest_valid
+      effort 10d
+      allocate person_on
+    }
+  }
+
+  task accession "CanDIG Accession IDs" {
+    task accession_generation "Automatic generation IDs"{
+      depends activity1.be
+      allocate person_on
+      effort 40d
+    }
+    task deposit "Deposit w/ Accession ID in MDS" {
+      allocate person_on
+      depends activity1.ingest.ingest_fastq_qc
+      effort 20d
+    }
+  }
+
+  task upload "Data Upload" {
+    task api "Upload API" {
+      allocate person_on
+      depends activity1.ingest, activity1.accession
+      effort 15d
+    }
+    task svc "Upload Service" {
+      allocate person_on
+      depends activity1.upload.api
+      effort 20d
+    }
+    task client "Multi-streaming upload client" {
+      allocate person_on
+      depends activity1.upload.api
+      effort 20d
+    }
+    task portal "Uploading portal" {
+      allocate person_qc
+      depends activity1.upload.client
+      effort 20d
+    }
+    task capture "Clinical and Phenotypic Data Forms" {
+      depends activity4.fhir
+      allocate person_qc
+      effort 20d
+    }
+    task htsget "Data Download with htsget" {
+      depends activity1.ingest
+      allocate person_on
+      effort 20d
+    }
+  }
+}
+
+task activity2 "Findability and Access" {
+  priority 100
+
+  task portal "Data Discovery Portal" {
+    task capi "'Censored' Discovery API" {
+      depends activity1
+      allocate person_on
+      effort 30d
+    }
+    task capi_svc "'Censored' Discovery Service" {
+      depends activity2.portal.capi
+      allocate person_qc
+      effort 30d
+    }
+    task ui "Discovery Portal" {
+      depends activity2.portal.capi
+      allocate person_qc
+      effort 30d
+    }
+  }
+
+  task caf "CAF interoperability" {
+    priority 99
+    allocate person_qc
+    effort 60d
+  }
+}
+
+task activity3 "Privacy-Preserving Reuse" {
+  priority 100
+
+  task diffpriv "Differential Privacy" {
+    task diffpriv_var "DiffP In Variant Queries" {
+      allocate person_bc
+      effort 20d
+    }
+    task diffpriv_cp "DiffP In Clin/Phen Queries" {
+      allocate person_bc
+      effort 20d
+    }
+  }
+  task duo "Data Use Ontologies" {
+    task duo_md "Add DUO fields to metadata service" {
+      allocate person_bc
+      effort 30d
+    }
+    task duo_portal "Add DUO fields to upload portal" {
+      depends activity1.upload, activity3.duo.duo_md
+      allocate person_qc
+      effort 10d
+    }
+  }
+  task authz "Fine-Grained Authorization Engine" {
+    task authz_server "Stand up and integrate into deployment authz service" {
+      allocate existing_person_bc
+      effort 60d
+    }
+    task authz_duo "Incorporate DUO into authorization requests" {
+      depends activity3.authz.authz_server, activity3.duo.duo_md
+      allocate person_bc
+      effort 30d
+    }
+    task authz_dp "Authorize differentially private aggregations" {
+      depends activity3.authz.authz_server, activity3.diffpriv
+      allocate person_bc
+      effort 30d
+    }
+  }
+
+  task logs "Depositor-Viewable Data Use Logs" {
+    task logapi "Add Data Use logging to R&V, C/P APIs" {
+      allocate person_bc
+      effort 20d
+    }
+    task logging "Persistently maintain logs in back-end store" {
+      depends activity3.logs.logapi
+      allocate person_bc
+      effort 20d
+    }
+    task viewlogs "View Data Use Logs in Upload Portal" {
+      depends activity3.logs.logging, activity1.upload
+      allocate person_qc
+      effort 20d
+    }
+  }
+}
+
+task activity4 "Expanded Health Data Support" {
+  priority 100
+
+  task fhir "Wider Range of Clin/Phen Data" {
+    allocate person_qc
+    effort 60d
+  }
+  task external "Links to External Data Objects" {
+    allocate person_bc
+    effort 20d
+  }
+  task rnaseq "Single Cell Data" {
+    allocate person_qc
+    effort 60d
+  }
+  task rnaexp "RNA Expression Data" {
+    allocate person_bc
+    effort 60d
+  }
+}
+
+
+# Now the project has been specified completely. Stopping here would
+# result in a valid TaskJuggler file that could be processed and
+# scheduled. But no reports would be generated to visualize the
+# results.
+
+navigator navbar {
+  hidereport 0
+}
+
+macro TaskTip [
+  tooltip istask() -8<-
+    '''Start: ''' <-query attribute='start'->
+    '''End: ''' <-query attribute='end'->
+    ----
+    '''Resources:'''
+
+    <-query attribute='resources'->
+    ----
+    '''Precursors: '''
+
+    <-query attribute='precursors'->
+    ----
+    '''Followers: '''
+
+    <-query attribute='followers'->
+    ->8-
+]
+
+textreport frame "" {
+  header -8<-
+    == CANARIE RDM Proposal: CanDIG National Genomic Data Service ==
+    <[navigator id="navbar"]>
+  ->8-
+  footer "----"
+  textreport index "Overview" {
+    formats html
+    center '<[report id="overview"]>'
+  }
+
+  textreport wps "Work packages" {
+    textreport t_data_publishing "WP Data Publishing" {
+      formats html
+      center '<[report id="data_publishing"]>'
+    }
+    textreport t_access "WP Findability and Access" {
+      formats html
+      center '<[report id="access"]>'
+    }
+    textreport t_reuse "WP Authorized Privacy-Preserving Reuse" {
+      formats html
+      center '<[report id="reuse"]>'
+    }
+    textreport t_moardata "WP Expanded Health Data Support" {
+      formats html
+      center '<[report id="moardata"]>'
+    }
+  }
+
+  textreport "ResourceGraph" {
+    formats html
+    title "Resource Graph"
+    center '<[report id="resourceGraph"]>'
+  }
+}
+
+# A traditional Gantt chart with a project overview.
+taskreport overview "" {
+  header -8<-
+    === Project Overview ===
+
+    The project is structured into 4 work packages.
+
+    # <-reportlink id='frame.wps.t_data_publishing'->
+    # <-reportlink id='frame.wps.t_access'->
+    # <-reportlink id='frame.wps.t_reuse'->
+    # <-reportlink id='frame.wps.t_moardata'->
+
+    === Original Project Plan ===
+  ->8-
+  columns bsi { title 'WBS' },
+          name, start, end, effort, resources,
+          chart { ${TaskTip} }
+  # For this report we like to have the abbreviated weekday in front
+  # of the date. %a is the tag for this.
+  timeformat "%a %Y-%m-%d"
+  loadunit days
+  hideresource 1
+  balance personnel  rev
+  caption 'All effort values are in person-days.'
+
+  footer -8<-
+    === Staffing ===
+
+    All project phases are properly staffed. See [[ResourceGraph]] for
+    detailed resource allocations.
+
+    === Current Status ===
+
+    Some blurb about the current situation.
+  ->8-
+}
+
+# Macro to set the background color of a cell according to the alert
+# level of the task.
+macro AlertColor [
+  cellcolor plan.alert = 0 "#00D000" # green
+  cellcolor plan.alert = 1 "#D0D000" # yellow
+  cellcolor plan.alert = 2 "#D00000" # red
+]
+
+taskreport status "" {
+  columns bsi { width 50 title 'WBS' }, name { width 150 },
+          start { width 100 }, end { width 100 },
+          effort { width 100 },
+          alert { tooltip plan.journal
+                          != '' "<-query attribute='journal'->" width 150 },
+          status { width 150 }
+
+  taskreport dashboard "" {
+    headline "Project Dashboard (<-query attribute='now'->)"
+    columns name { title "Task" ${AlertColor} width 200},
+            resources { width 200 ${AlertColor}
+                        listtype bullets
+                        listitem "<-query attribute='name'->"
+                        start ${projectstart} end ${projectend} },
+            alerttrend { title "Trend" ${AlertColor} width 50 },
+            journal { width 350 ${AlertColor} }
+    journalmode status_up
+    journalattributes headline, author, date, summary, details
+    hidetask ~hasalert(0)
+    sorttasks alert.down, plan.end.up
+    period %{${now} - 1w} +1w
+  }
+  taskreport completed "" {
+    headline "Already completed tasks"
+    hidetask ~(plan.end <= ${now})
+  }
+  taskreport ongoing "" {
+    headline "Ongoing tasks"
+    hidetask ~((plan.start <= ${now}) & (plan.end > ${now}))
+  }
+  taskreport future "" {
+    headline "Future tasks"
+    hidetask ~(plan.start > ${now})
+  }
+}
+
+# A list of tasks showing the resources assigned to each task.
+taskreport data_publishing "Data Publishing" {
+  headline "Activity 1 - Resource Allocation Report"
+  columns bsi { title 'WBS' }, name, start, end, effort { title "Work" },
+          duration, chart { ${TaskTip} scale day width 500 }
+  timeformat "%Y-%m-%d"
+  hideresource ~(isleaf() & isleaf_())
+  sortresources name.up
+  taskroot activity1
+}
+taskreport access "Findability and Authentiation" {
+  headline "Activity 2 - Resource Allocation Report"
+  columns bsi { title 'WBS' }, name, start, end, effort { title "Work" },
+          duration, chart { ${TaskTip} scale day width 500 }
+  timeformat "%Y-%m-%d"
+  hideresource ~(isleaf() & isleaf_())
+  sortresources name.up
+  taskroot activity2
+}
+taskreport reuse "Privacy-Preserving Reuse" {
+  headline "Activity 3 - Resource Allocation Report"
+  columns bsi { title 'WBS' }, name, start, end, effort { title "Work" },
+          duration, chart { ${TaskTip} scale day width 500 }
+  timeformat "%Y-%m-%d"
+  hideresource ~(isleaf() & isleaf_())
+  sortresources name.up
+  taskroot activity3
+}
+taskreport moardata "Expanded Health Data Support" {
+  headline "Activity 4 - Resource Allocation Report"
+  columns bsi { title 'WBS' }, name, start, end, effort { title "Work" },
+          duration, chart { ${TaskTip} scale day width 500 }
+  timeformat "%Y-%m-%d"
+  hideresource ~(isleaf() & isleaf_())
+  sortresources name.up
+  taskroot activity4
+}
+
+# A graph showing resource allocation. It identifies whether each
+# resource is under- or over-allocated for.
+resourcereport resourceGraph "" {
+  headline "Resource Allocation Graph"
+  columns no, name, effort, rate, weekly { ${TaskTip} }
+  loadunit shortauto
+  # We only like to show leaf tasks for leaf resources.
+  hidetask ~(isleaf() & isleaf_())
+  sorttasks plan.start.up
+}
