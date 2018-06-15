@@ -1,7 +1,6 @@
 /*
- * This file contains a project skeleton. It is part of the
- * TaskJuggler project management tool. You can use this as a basis to
- * start you own project file.
+ * This file contains a project description for the
+ * TaskJuggler project management tool.
  */
 project rdm "RDM"  2018-10-01-0:00--0500 +2y {
   timezone "America/Toronto"
@@ -29,22 +28,25 @@ account personnel "Personnel costs" {
   account cd_hsc "CanDIG HSC" {
     aggregate resources
   }
+  account cd_qc "CanDIG C" {
+    aggregate resources
+  }
 }
 
 account rev "Payments"
 balance personnel rev
-
 
 # The daily default rate of all resources. This can be overridden for each
 # resource. We specify this, so that we can do a good calculation of
 # the costs of the project.
 rate 50.0
 
-# This is a set of example resources.
+# This is a set of resources (people).
 resource person_on "ON" {
   chargeset hsc 100%
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
+  leaves unemployed 2018-10-01 - 2019-03-31
 }
 resource person_qc "QC" {
   chargeset mugqic 100%
@@ -55,6 +57,7 @@ resource person_bc "BC" {
   chargeset bcgsc 100%
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
+  leaves unemployed 2018-10-01 - 2019-03-31
 }
 resource existing_person_on "ON: Existing" {
   chargeset cd_hsc 100%
@@ -63,6 +66,11 @@ resource existing_person_on "ON: Existing" {
 }
 resource existing_person_bc "BC: Existing" {
   chargeset cd_bcgsc 100%
+  leaves holiday 2018-12-20 - 2019-01-06
+  efficiency .942   # 3 wks vacation/yr
+}
+resource existing_person_qc "QC: Existing" {
+  chargeset cd_qc 100 %
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
 }
@@ -242,13 +250,29 @@ task activity4 "Expanded Health Data Support" {
     allocate person_bc
     effort 20d
   }
-  task rnaseq "Single Cell Data" {
-    allocate person_qc
-    effort 60d
-  }
-  task rnaexp "RNA Expression Data" {
-    allocate person_bc
-    effort 60d
+  task rnaseq "Single Cell and RNA Expression Data" {
+    task integration "Integration Test Harness" {
+      allocate existing_person_qc
+      effort 60d
+    }
+    task scapi "Single Cell API" {
+      allocate person_qc
+      effort 30d
+    }
+    task sc_service "Single Cell Service" {
+      depends activity4.rnaseq.scapi
+      allocate person_qc
+      effort 45d
+    }
+    task rnaexp_api "RNA Expression API" {
+      allocate person_bc
+      effort 30d
+    }
+    task rnaexp_service "RNA Expression Service" {
+      depends activity4.rnaseq.rnaexp_api
+      allocate person_bc
+      effort 45d
+    }
   }
 }
 
