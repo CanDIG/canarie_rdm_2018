@@ -39,7 +39,7 @@ broadly as 'omics, offer important new windows into understanding
 human health.  A torrent of such data is already being produced at
 sites across Canada, driven currently by research, but with clinical
 'omics data generation soon to dominate as these molecular tests
-begin to enter the standard care.
+begin to enter standard care.
 
 In Canada, healthcare and healthcare data is an area of exclusive
 provincial jurisdiction.  Diffences between provincial privacy
@@ -172,16 +172,11 @@ experience, expertise and qualifications.
 
   --------------------------------------------------------------------------------- --
   Name                                                                              
-
   Title                                                                             
-
   Faculty/Department/Division/Program                                               
-
   Phone                                                                             
-
   Email                                                                             
 
-  ------------------------------------------------------------------------------------
 
 Append a short bio (maximum one \[1\] page) summarizing relevant
 experience, expertise and qualifications.
@@ -192,16 +187,10 @@ experience, expertise and qualifications.
   If you do not currently have a Lead Software Developer, please leave this section blank.
   ------------------------------------------------------------------------------------------ --
   Name                                                                                       
-
   Title                                                                                      
-
   Faculty/Department/Division/Program                                                        
-
   Phone                                                                                      
-
   Email                                                                                      
-
-  ---------------------------------------------------------------------------------------------
 
 Append a short bio (maximum one \[1\] page) summarizing relevant
 experience, expertise and qualifications.
