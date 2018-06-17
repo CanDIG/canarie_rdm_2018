@@ -1,4 +1,8 @@
-# CANARIE RDM proposal
+# CanDIG CHORD: Canadian Health Omics Repository, Distributed
+
+![CHORD logo](figures/chord-sm.png)
+
+The doucument is structured as below:
 
 * [rdm.tjp](taskjuggler_workplan/rdm.tjp) - [TaskJuggler](http://taskjuggler.org) description of work plan
 * [docs/](docs/) - rendered HTML version of taskjuggler workplan (viewable at http://candig.github.io/canarie_rdm_2018/Overview.html)
