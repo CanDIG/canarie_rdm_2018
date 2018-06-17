@@ -28,7 +28,7 @@ Project Summary
 >     - specific research disciplines currently supported.
 > Max 750 words
 
-**Note - need to lose ~75 words**
+**Note - need to lose ~40 words**
 
 Tackling the &ldquo;wicked problems&rdquo; of cancer and rare
 diseases against the already complex landscape of human biology
@@ -74,8 +74,7 @@ brings distinctively Canadian insight into federation to the GA4GH,
 and it federated approach builds on the investments Canada has made
 in digital research infrastucture, both the National Research and
 Education Network, and computational and local storage infrastructure
-at its participating sites (The BC Genome Sciences Center; HPC4Health;
-and the McGill University/Genome Quebec Innovation Centre).
+at its participating sites.
 
 The CanDIG CHORD project will allow the technologies and services
 being built by CanDIG and its international partners to be made
@@ -87,10 +86,7 @@ the broader 'omics by enhancing RNA expression data support,
 supporting single-cell RNA data, and including external linking to
 related but non-genomic data resources such as for medical imaging.
 
-CHORD development will focus on four overall activities: data
-publishing, expanded health data support, findability and access,
-and authorized privacy-preserving reuse.
-
+CHORD development will focus on four overall activities.
 In the data publishing activity, a key consideration is the wide
 variety of possible data sources that researchers will have;
 interoperability will require automated quality control and
@@ -159,7 +155,7 @@ experience, expertise and qualifications.
   Phone                                                
   Email                                                
 
-  **Co-Principal Investigator** *(where applicable)*
+  **Co-Principal Investigator**
   ---------------------------------------------------- --
   Name                                                 
   Title                                                
@@ -173,7 +169,7 @@ experience, expertise and qualifications.
   ------------------------------------------------------------------------------------
   **Project Manager**
 
-  CANARIE strongly recommends that your team include a dedicated Project Manager.
+
   --------------------------------------------------------------------------------- --
   Name                                                                              
 
@@ -184,6 +180,7 @@ experience, expertise and qualifications.
   Phone                                                                             
 
   Email                                                                             
+
   ------------------------------------------------------------------------------------
 
 Append a short bio (maximum one \[1\] page) summarizing relevant
@@ -203,6 +200,7 @@ experience, expertise and qualifications.
   Phone                                                                                      
 
   Email                                                                                      
+
   ---------------------------------------------------------------------------------------------
 
 Append a short bio (maximum one \[1\] page) summarizing relevant
