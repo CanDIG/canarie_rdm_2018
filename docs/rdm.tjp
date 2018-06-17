@@ -205,7 +205,7 @@ task activity3 "Privacy-Preserving Reuse" {
     }
   }
   task authz "Fine-Grained Authorization Engine" {
-    task authz_server "Stand up and integrate into deployment authz service" {
+    task authz_server "Integrate into deployment authz service" {
       allocate existing_person_bc
       effort 60d
     }
@@ -357,12 +357,13 @@ taskreport overview "" {
     === Original Project Plan ===
   ->8-
   columns bsi { title 'WBS' },
-          name, start, end, effort, resources,
+          name, start, end, resources,
           chart { ${TaskTip} }
   # For this report we like to have the abbreviated weekday in front
   # of the date. %a is the tag for this.
   timeformat "%a %Y-%m-%d"
-  loadunit days
+  loadunit shortauto
+  # loadunit days
   hideresource 1
   balance personnel  rev
   caption 'All effort values are in person-days.'
