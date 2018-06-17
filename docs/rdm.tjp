@@ -42,34 +42,34 @@ balance personnel rev
 rate 50.0
 
 # This is a set of resources (people).
-resource person_on "ON" {
+resource on "ON" {
   chargeset hsc 100%
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
   leaves unemployed 2018-10-01 - 2019-03-31
 }
-resource person_qc "QC" {
+resource qc "QC" {
   chargeset mugqic 100%
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
 }
-resource person_bc "BC" {
+resource bc "BC" {
   chargeset bcgsc 100%
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
   leaves unemployed 2018-10-01 - 2019-03-31
 }
-resource existing_person_on "ON: Existing" {
+resource cd_on "ON: CanDIG" {
   chargeset cd_hsc 100%
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
 }
-resource existing_person_bc "BC: Existing" {
+resource cd_bc "BC: CanDIG" {
   chargeset cd_bcgsc 100%
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
 }
-resource existing_person_qc "QC: Existing" {
+resource cd_qc "QC: CanDIG" {
   chargeset cd_qc 100 %
   leaves holiday 2018-12-20 - 2019-01-06
   efficiency .942   # 3 wks vacation/yr
@@ -80,39 +80,39 @@ task activity1 "Data Publishing" {
 
   task be "Production DOS/Minio backend" {
     effort 60d
-    allocate existing_person_on
+    allocate cd_on
   }
   task ingest "Data Ingest" {
     task ingest_valid "Validation lambdas" {
       effort 40d
       depends activity1.be
-      allocate person_on
+      allocate on
     }
     task ingest_vcf_norm "Normalization lambdas - VCF" {
       depends activity1.ingest.ingest_valid
       effort 20d
-      allocate person_on
+      allocate on
     }
     task ingest_fastq_norm "Normalization lambdas - FASTQ" {
       depends activity1.ingest.ingest_valid
       effort 10d
-      allocate person_on
+      allocate on
     }
     task ingest_fastq_qc "QC lambdas - FASTQ" {
       depends activity1.ingest.ingest_valid
       effort 10d
-      allocate person_on
+      allocate on
     }
   }
 
   task accession "CanDIG Accession IDs" {
     task accession_generation "Automatic generation IDs"{
       depends activity1.be
-      allocate person_on
+      allocate on
       effort 40d
     }
     task deposit "Deposit w/ Accession ID in MDS" {
-      allocate person_on
+      allocate on
       depends activity1.ingest.ingest_fastq_qc
       effort 20d
     }
@@ -120,33 +120,33 @@ task activity1 "Data Publishing" {
 
   task upload "Data Upload" {
     task api "Upload API" {
-      allocate person_on
+      allocate on
       depends activity1.ingest, activity1.accession
       effort 15d
     }
     task svc "Upload Service" {
-      allocate person_on
+      allocate on
       depends activity1.upload.api
       effort 20d
     }
     task client "Multi-streaming upload client" {
-      allocate person_on
+      allocate on
       depends activity1.upload.api
       effort 20d
     }
     task portal "Uploading portal" {
-      allocate person_qc
+      allocate qc
       depends activity1.upload.client
       effort 20d
     }
     task capture "Clinical and Phenotypic Data Forms" {
       depends activity4.fhir
-      allocate person_qc
+      allocate qc
       effort 20d
     }
     task htsget "Data Download with htsget" {
       depends activity1.ingest
-      allocate person_on
+      allocate on
       effort 20d
     }
   }
@@ -158,24 +158,24 @@ task activity2 "Findability and Access" {
   task portal "Data Discovery Portal" {
     task capi "'Censored' Discovery API" {
       depends activity1
-      allocate person_on
+      allocate on
       effort 30d
     }
     task capi_svc "'Censored' Discovery Service" {
       depends activity2.portal.capi
-      allocate person_qc
+      allocate qc
       effort 30d
     }
     task ui "Discovery Portal" {
       depends activity2.portal.capi
-      allocate person_qc
+      allocate qc
       effort 30d
     }
   }
 
   task caf "CAF interoperability" {
     priority 99
-    allocate person_qc
+    allocate qc
     effort 60d
   }
 }
@@ -185,55 +185,55 @@ task activity3 "Privacy-Preserving Reuse" {
 
   task diffpriv "Differential Privacy" {
     task diffpriv_var "DiffP In Variant Queries" {
-      allocate person_bc
+      allocate bc
       effort 20d
     }
     task diffpriv_cp "DiffP In Clin/Phen Queries" {
-      allocate person_bc
+      allocate bc
       effort 20d
     }
   }
   task duo "Data Use Ontologies" {
     task duo_md "Add DUO fields to metadata service" {
-      allocate person_bc
+      allocate bc
       effort 30d
     }
     task duo_portal "Add DUO fields to upload portal" {
       depends activity1.upload, activity3.duo.duo_md
-      allocate person_qc
+      allocate qc
       effort 10d
     }
   }
   task authz "Fine-Grained Authorization Engine" {
     task authz_server "Integrate into deployment authz service" {
-      allocate existing_person_bc
+      allocate cd_bc
       effort 60d
     }
     task authz_duo "Incorporate DUO into authorization requests" {
       depends activity3.authz.authz_server, activity3.duo.duo_md
-      allocate person_bc
+      allocate bc
       effort 30d
     }
     task authz_dp "Authorize differentially private aggregations" {
       depends activity3.authz.authz_server, activity3.diffpriv
-      allocate person_bc
+      allocate bc
       effort 30d
     }
   }
 
   task logs "Depositor-Viewable Data Use Logs" {
     task logapi "Add Data Use logging to R&V, C/P APIs" {
-      allocate person_bc
+      allocate bc
       effort 20d
     }
     task logging "Persistently maintain logs in back-end store" {
       depends activity3.logs.logapi
-      allocate person_bc
+      allocate bc
       effort 20d
     }
     task viewlogs "View Data Use Logs in Upload Portal" {
       depends activity3.logs.logging, activity1.upload
-      allocate person_qc
+      allocate qc
       effort 20d
     }
   }
@@ -243,34 +243,34 @@ task activity4 "Expanded Health Data Support" {
   priority 100
 
   task fhir "Wider Range of Clin/Phen Data" {
-    allocate person_qc
+    allocate qc
     effort 60d
   }
   task external "Links to External Data Objects" {
-    allocate person_bc
+    allocate bc
     effort 20d
   }
   task rnaseq "Single Cell and RNA Expression Data" {
     task integration "Integration Test Harness" {
-      allocate existing_person_qc
+      allocate cd_qc
       effort 60d
     }
     task scapi "Single Cell API" {
-      allocate person_qc
+      allocate qc
       effort 30d
     }
     task sc_service "Single Cell Service" {
       depends activity4.rnaseq.scapi
-      allocate person_qc
+      allocate qc
       effort 45d
     }
     task rnaexp_api "RNA Expression API" {
-      allocate person_bc
+      allocate bc
       effort 30d
     }
     task rnaexp_service "RNA Expression Service" {
       depends activity4.rnaseq.rnaexp_api
-      allocate person_bc
+      allocate bc
       effort 45d
     }
   }
@@ -359,9 +359,7 @@ taskreport overview "" {
   columns bsi { title 'WBS' },
           name, start, end, resources,
           chart { ${TaskTip} }
-  # For this report we like to have the abbreviated weekday in front
-  # of the date. %a is the tag for this.
-  timeformat "%a %Y-%m-%d"
+  timeformat "%Y-%m-%d"
   loadunit shortauto
   # loadunit days
   hideresource 1
