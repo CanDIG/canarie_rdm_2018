@@ -103,14 +103,16 @@ accesssion identifiers for uploaded information.
 The broader research community will also bring with them a wider
 range of data _types_.  In the extended health data activity, CHORD
 will develop new services that directly support bulk RNA expression
-data and emerging single cell RNA data standards; for single cell
-data, CHORD will benefit from CanDIG's GA4GH partnership that includes
-the Human Cell Atlas.  CHORD developemnt will follow a modern,
-microservices, &ldquo;API-first&rdquo; approach, and to support the
-end-to-end testing of the multiple services that will comprise
-CHORD, the CanDIG project will build an integrated testing harness
-to ensure that these multiple services can be tested together in
-an automated and routine fashion.
+data and emerging single cell RNA data standards. Within the GA4GH
+Driver project community, CanDIG has the opportunity to interact
+and collaborate with 14 international genomic data projects including
+the Human Cell Atlas; this will inform CHORD's single cell data work. 
+CHORD development will follow a modern, microservices,
+&ldquo;API-first&rdquo; approach, and to support the end-to-end
+testing of the multiple services that will comprise CHORD, the
+CanDIG project will build an integrated testing harness to ensure
+that these multiple services can be tested together in an automated
+and routine fashion.
 
 Researchers will also have diverse requirements for authorization.
 In the authorized privacy preserving reuse activity, CanDIG will
