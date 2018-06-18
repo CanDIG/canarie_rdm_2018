@@ -108,7 +108,7 @@ task activity1 "Data Publishing" {
   task accession "CanDIG Accession IDs" {
     task accession_generation "Automatic generation IDs"{
       depends activity1.be
-      allocate on
+      allocate cd_on
       effort 40d
     }
     task deposit "Deposit w/ Accession ID in MDS" {
@@ -121,7 +121,6 @@ task activity1 "Data Publishing" {
   task upload "Data Upload" {
     task api "Upload API" {
       allocate on
-      depends activity1.ingest, activity1.accession
       effort 15d
     }
     task svc "Upload Service" {
@@ -136,7 +135,7 @@ task activity1 "Data Publishing" {
     }
     task portal "Uploading portal" {
       allocate qc
-      depends activity1.upload.client
+      depends activity1.upload.client, activity1.accession, activity1.ingest
       effort 20d
     }
     task capture "Clinical and Phenotypic Data Forms" {
@@ -211,7 +210,7 @@ task activity3 "Privacy-Preserving Reuse" {
     }
     task authz_duo "Incorporate DUO into authorization requests" {
       depends activity3.authz.authz_server, activity3.duo.duo_md
-      allocate bc
+      allocate on
       effort 30d
     }
     task authz_dp "Authorize differentially private aggregations" {
