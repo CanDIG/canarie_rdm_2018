@@ -4,8 +4,42 @@ Scoring Criteria:
 > 1.  **What is the extent to which the project makes use of or
 >     contributes to digital research infrastructure?**
 
+CHORD builds on previous Canadian software, network, and computataional
+investments in digital research infrastructure (DRI), to enable a
+national data service for privacy-sensitive genomic and related
+health data.
+
+CHORD builds on previous software DRI investements by building a
+secure, privacy-preserving data back end which which the GenAP
+portal will be able to make use of enable analyses of private health
+data.
+
+By providing an inherently federated approach to the analysis of 
+Canadian health genomic and related data, CHORD builds on the
+investments behind Canada's National Education and Research Network
+for high-speed, low-latency availability of queries and intermediate
+results.
+
+And the computational, storage, and personnel resources at the
+participating sites (MUQGIC, HPC4Health, and the BCGSC), will be
+the backbone on which initial CHORD servces are provided.
+
+Those investments, combined with the services provided in the work
+described here, means that CHORD will a truly national data service
+for privacy-sensitive genomics and related health data.
+
+
 > 2.  **What is the extent to which the project creates or contributes to
 >     a national data service?**
+
+CHORD will provide four key capabilites which would define a national data service
+for privacy-sensitive genomic health data.
+
+CHORD will:
+* allow **publishing** genomic and associated clinical and phenotypic data, and making them available for analysis,
+* enable **searching** for data, including mechanisms for discovering potential data that a user does not yet have authorization to access, with information about who to contact about authorization,
+* support **moving** computation to private data, allowing analyses of sensitive data, and combining intermediate results of computations between sites; and
+* facilitate the **linking** of data and literature by providing citable persistent identifiers.
 
 > 3.  **What is the extent to which the project supports FAIR principles?**
 
@@ -169,7 +203,9 @@ resources, may be of HPC or OpenStack configurations, and automated
 execution of the ingest tasks will have to work in either case.  For
 this, we are making use of the in-progress workflow execution service,
 based on GA4GH standards and using existing tooling which works on
-either sort of compute back end.  The proposed CHORD work for this task
+either sort of compute back end.  Singularity containers will be
+used, allowing both ease of packaging and interoperability with different
+sorts of compute environments.  The proposed CHORD work for this task
 (Activity 1.2) is to develop the software which will integrate the 
 two services.
 
