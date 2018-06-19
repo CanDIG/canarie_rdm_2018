@@ -28,7 +28,6 @@ Those investments, combined with the services provided in the work
 described here, means that CHORD will a truly national data service
 for privacy-sensitive genomics and related health data.
 
-
 > 2.  **What is the extent to which the project creates or contributes to
 >     a national data service?**
 
@@ -83,6 +82,17 @@ to allow data to be searched by allowable use.
 
 > 4.  **What is the extent to which the project integrates with
 >     international digital research infrastructure?**
+
+CanDIG is a driver project for the Global Alliance for Genomics and
+Health, an international organization defining standards, APIs,
+and, policies for the effective, interoperable, and responsible
+sharing of genomic data.  As a driver project, CanDIG both contributes
+to the development of standards, and participates in collaborations
+between other genomics projects such as Genomics England and the
+Australian Genomics Health Alliance.  CHORD will benefit from
+CanDIG's participation in GA4GH, ensuring that CHORD services
+developed are compatable with new and emerging standards and are
+built in collaboration with similar projects around the world.
 
 System Architecture 
 ====================
