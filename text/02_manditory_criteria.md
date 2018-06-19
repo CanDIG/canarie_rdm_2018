@@ -1,26 +1,38 @@
 Mandatory Criteria:
 ===================
 
-_Please address each of the following mandatory criteria_:
+CHORD is a project to build a federated, Canadian, national data
+service for privacy-sensitive genomic and related health data.
 
-1.  **How does the proposed software make use of Canadian digital
-    infrastructure** (networking, compute, storage and/or sensors)**?**
+**1. How does the proposed software make use of Canadian digital infrastructure**
 
-2. **Explain how the proposed project contributes to one or more of
-*CANARIE’s expected results:***
+By providing an inherently federated approach to the analysis of 
+Canadian health genomic and related data, CHORD builds on the
+investments behind Canada's National Education and Research Network
+for high-speed, low-latency availability of queries and intermediate
+results.
 
-> \(a) enhance opportunities for collaborative knowledge creation and
-> innovation within Canada’s research and education communities through
-> the maintenance and development of the CANARIE Network and related tools
-> and services;
->
-> \(b) expand the research and education community’s access to and
-> utilization of the CANARIE Network and the availability of tools and
-> programming that increase the effectiveness of its use; and,
->
-> \(c) enable the creation of innovative Information and Communications
-> Technology (ICT) products and services and accelerate their
-> commercialization in Canada.
+In addition, the computational and storage at the participating
+sites (MUQGIC, HPC4Health, and the BCGSC), will be the backbone
+upon which initial CHORD servces are provided.
+
+**2. Explain how the proposed project contributes to one or more of CANARIE’s expected results**
+
+CHORD will judiciously unlock silos of privacy-sensitive genomic
+and related health data, allowing their joint analyses over the
+CANARIE network in a federated fashion.
+
+In doing so, CHORD will contribute to CANARIE's expected result
+(a) by relying fundamentally on the maintenence and continued
+development of the CANARIE to spur entirely new collaborative
+knowledge creation that results from the ability to analyze national-scale
+health data sets across silos.
+
+CHORD will also contribute to CANARIE's expected result (b) by
+increasing the research community's utilization of the CANARIE
+network by making it safe and feasible to make privacy-sensitive
+health omics data available for analysis across the NREN while
+strictly limiting direct access.
 
 **3. Please provide information to support that the software development
 proposed is technologically and economically viable in the timeframe of
@@ -28,20 +40,29 @@ the project plan.**
 
 
 **4. All funded work must be performed in Canada. Please identify the
-locations(s) at which the funded work would be performed. **
+locations(s) at which the funded work would be performed.**
 
+The funded work will be performed at:
+* McGill University, Montréal
+* The Hospital for Sick Children, Toronto
+* University Health Network, Toronto
+* Canada's Michael Smith Genome Sciences Centre, Vancouver
 
 **5. The Lead Contractor must be a Canadian university, college,
 corporation or other legally recognized entity. Please provide the
 organization’s URL.**
+
+https://www.mcgill.ca
 
 **6. No more than half of the membership and Board of Directors of the
 Lead Contractor can be composed of representatives or agents of the
 federal government. Please provide a list of Board members or provide
 the list via the relevant URL.**
 
+https://www.mcgill.ca/boardofgovernors/membership
+
 **7. In-Kind contributions must be at least 15% of total eligible
-project costs.** This is to be demonstrated in the Preliminary Budget.
+project costs.** 
 
 **CONFIRMED **
 

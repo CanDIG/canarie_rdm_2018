@@ -60,7 +60,9 @@ in digital research infrastucture, both the National Research and
 Education Network, and computational and local storage infrastructure
 at its participating sites.
 
-CHORD allows the technologies and services being built by CanDIG
+CHORD is a project to build a federated, Canadian, national data
+service for privacy-sensitive genomic and related health data.
+It allows the technologies and services being built by CanDIG
 and its international partners to be made available to the Candian
 health research community more broadly. 
 
