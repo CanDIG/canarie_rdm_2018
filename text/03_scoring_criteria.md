@@ -9,6 +9,45 @@ Scoring Criteria:
 
 > 3.  **What is the extent to which the project supports FAIR principles?**
 
+The CHORD project aims to improve the FAIRness of the services
+offered by CanDIG in two broad ways.
+
+First, CHORD will allow broader adoption of the data and computation
+services offered by CanDIG, beyond large national projects, by
+making it easier to set up new CHORD sites to support data publishing
+and re-use in the broader genomics research community.
+
+In the second, CHORD services will strengthen the FAIRness of the
+current CanDIG suite of services in specific ways.
+
+While findability of data through CanDIG services is very strong,
+with rich metadata indexed in a searchable resource, with metadata
+specifying the data identifier (F2,F3, and F4), identifiers are not
+now guaranteed to be persistent; CHORD will improve the findability
+and citability of Canadian genomic data by allowing it to be published
+with a globally unique and persistent identifier (principle F1).
+
+Availability for analysis has been a guiding principle of
+CanDIG services (via open, authorized protocals, A1.1, A1.2),
+but accessibility (including, for instance, for download) _per se_ had
+not been a goal; similarly, data that was not available due whether
+due to loss or lack of authorization meant that the metadata was
+no longer visible.  CHORD will allow data downloads when so authorized
+(A1) and the &ldquo;Censored Discovery&rdquo; will always allow
+some degree of accessiblity of metadata (A2).
+
+Interoperability of data betwen similar projects with CanDIG services
+is good, with recommended ontologies (I1, I2) and qualified references
+between metadata items or data items (I3), and reuse was enabled by
+strong community standards (R1.3), provenance information (R1.2), and 
+accurate and relevant attributes (R1).  Reuse however remains somewhat
+limited by only recent emergence of standards for describing what 
+data may be used for (R1.1); data may be consented for reuse only for certain
+purposes.  CHORD will implement Data Use Ontologies such as the 
+GA4GH [Automatable Discovery and Access Matrix (ADA-M)](https://github.com/ga4gh/ADA-M)
+to allow data to be searched by allowable use.
+
+
 > 4.  **What is the extent to which the project integrates with
 >     international digital research infrastructure?**
 
