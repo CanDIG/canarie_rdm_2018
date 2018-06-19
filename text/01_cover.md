@@ -3,14 +3,9 @@
 
 ## Name of project:
 
+![CHORD logo](../figures/chord-vsm.png "CHORD logo")
+
 CanDIG CHORD: Canadian Health Omics Repository, Distributed
-
-*or*
-
-- The Canadian Health Repository for GEnomics Data (CHaRGED)
-- DIstributed Service for Canadian Omics (DISCO)
-- Canadian HeAlth National GEnomics Repository (CHANGER)
-- Genomics REpository NAtional Canadian HEalth (GRENACHE, grapes, can use vines as a visual)
 
 ## Institution / Organization (Lead Contractor):
 
@@ -18,17 +13,6 @@ McGill University
 
 Project Summary
 ===============
-
-> Using language and terms that someone without professional training
-> in software development or data management can understand, please
-> provide an executive overview of your proposed project. Should your
-> proposal be accepted, this information will be used by CANARIE for
-> communication and marketing purposes.  You must address the following:
->     - current functionality and features,
->     - specific research disciplines currently supported.
-> Max 750 words
-
-**Note - need to lose ~40 words**
 
 Tackling the &ldquo;wicked problems&rdquo; of cancer and rare
 diseases against the already complex landscape of human biology
@@ -76,24 +60,17 @@ in digital research infrastucture, both the National Research and
 Education Network, and computational and local storage infrastructure
 at its participating sites.
 
-The CanDIG CHORD project will allow the technologies and services
-being built by CanDIG and its international partners to be made
-available to the Candian health research community more broadly.
-CHORD will build the software necessary to allowing researchers to
-publish their data with persistent identifiers and fine-grained
-control over data use; it will extend the genomic data support into
-the broader 'omics by enhancing RNA expression data support,
-supporting single-cell RNA data, and including external linking to
-related but non-genomic data resources such as for medical imaging.
+CHORD allows the technologies and services being built by CanDIG
+and its international partners to be made available to the Candian
+health research community more broadly. 
 
-CHORD development will focus on four overall activities.
 In the data publishing activity, a key consideration is the wide
 variety of possible data sources that researchers will have;
 interoperability will require automated quality control and
 normalization of omics data upon upload, before ingestion into the
 system.  The CanDIG project will accelerate its development of a
-scalable genomics data back-end which supports automated processing tasks when data is stored, and
-CHORD will develop automatically executed routines (&ldquo;lambdas&rdquo;)
+scalable genomics data back-end which supports automated processing
+tasks when data is stored, and CHORD will develop routines 
 for quality control and normalization of reads and variants.  CHORD
 will also develop upload and download services,
 upload portal which will include clinical, phenotypic, and metadata
