@@ -262,7 +262,29 @@ Software Development Summary
 Future Customization and/or Extension of Functionality
 ======================================================
 
-> Describe how your software design allows for future customization and/or extension of functionality.
->
-> Max. 500 words.
+The CHORD design is targetted towards a rapidly evolving genomics
+and health data environment.
+CHORD's service-oriented architecture is designed to enable future
+scale out, along dimensions of data volumes, data types, and data
+services.
+
+By separating the data persistance layer from the data services,
+having individual data services contained within their own tools,
+and using a reverse proxy API gateway to expose the services, we
+incur a modest degree of short-term complexity for future expansion.
+For instance, adding the RNA data services proposed in Activity 4.3
+does not require modifications to any other services as long as the
+existing metdata model is flexible enough to be able to describe
+the new data types.
+
+Factoring the clinical and phenotypic metadata storage out from
+the genomic data store shifts the coupling betwen metadata access
+from code and data models to RESTful API calls, allowing much 
+more rapid iteration on each side while greatly reducing the scope
+for breaking changes.
+
+Similarly, abstracting the workflow execution and genomic data store
+behind existing tooling like Cromwell or Minio allows us the
+flexibility to deploy on a wide variety of systems and system types.
+
 
