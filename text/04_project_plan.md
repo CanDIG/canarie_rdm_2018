@@ -41,15 +41,15 @@ Risk Assessment and Mitigation Plan
 ===================================
 
 **Risk Assessment: Development: Unforseen development complexity**
-**Mitigation**: The CHORD software development plan consists of
-individual activities that describe building features with ample
+**Mitigation**: The CHORD software plan has been developed to consist
+of individual activities that describe building features with
 precedent within either CanDIG, the previous activities of our
 participating institutions, or the activities of our GA4GH colleagues.
-The novelty consists in the integration of these services into a
-well-functioning whole in our genomics and health national context.
-While such integration is not without risk, the use of individual
-feature sets that have been used successfully elsewhere in the past
-offers some confidence in the feasibility of the plan.
+The novelty consists in the integration of these services in our
+genomics and health national context.  While such integration is
+not without risk, the use of individual feature sets that have been
+used successfully elsewhere in the past offers some confidence in
+the feasibility of the plan.
 
 **Risk Assessment: Development: Hiring and Retention, in CHORD or CanDIG**
 **Mitigation**: The CHORD software development plan describes related
@@ -217,12 +217,14 @@ to continue to obtain development and maintenance funding beyond 2021.
 Intellectual Property
 =====================
 
-> How do you intend to manage any intellectual property arising from this proposed project?
+The intellectual property developed by the CHORD project will consist
+of copyrights.  The standard license for CHORD software will be the
+LGPL, with the copyright holder for individual services being the
+institutional owner of the service development task, and the copyright
+holder for the deployment and integration framework being the lead
+contractor.
 
-> Please note: Should commercialization of the IP take place, royalties will be required to accrue 
-> to CANARIE to repay some or all of the contribution, and a royalty agreement will be required.
-
-- Owned by service owners?  Lead contractor?
-- GPL
-- Possibility for service contracts, relicensing for commercial reuse, or development of new features for a fee, but do not anticipate such revenue.
-
+While the project is open to the possibility of commercializing
+CHORD intellectual property, via service contracts, relicensing for
+commercial reuse, or development of new features for a fee, the
+participants but do not anticipate such revenue.
