@@ -289,9 +289,14 @@ McGill, a data discovery portal (Activity 2.1) will be built which
 allows the user to discover data, including data that the user does
 not have access to (where possible and made discoverable by the
 data owner) but with information about how to find out more about
-authorization for that data set; we will work with the GenAP team
-to attempt to also make such data discovery services available
-through the GenAP portal.  In addition, Activity 2.2 will build on
+authorization for that data set.
+
+This data discovery service will integrate with the previously CANARIE-funded GenAP platform, through its 
+Portal and APIs. GenAP leverages Compute Canada infrastructure and CANARIE high-speed network to
+facilitate bioinformatics analysis by the life science research community. As such, by making CHORD
+data discoverable and obtainable through GenAP will enable users to analyse its data
+in existing GenAP services, such as the Galaxy web interface. GenAP-Galaxy is a popular framework that allows launching computation
+jobs on Compute Canada infrastructure more easily. In addition, Activity 2.2 will build on
 the GenAP team's growing experience with using CAF for authentication
 to authentication via CAF into CHORD services.
 
