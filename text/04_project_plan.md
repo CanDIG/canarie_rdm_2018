@@ -195,23 +195,29 @@ interest.
 Maintenance and Support Plan
 ============================
 
-> Outline your maintenance and support plan for the proposed software post CANARIE funding. Include your plans for:
->
-> operations 
-> software maintenance
-> providing user support
-> extending / adding functionality
-> facilitating adoption by new users
-
 CHORD services will be integrated into CanDIG, a four-year CFI
 cyberinfrastructure project which completed its first annual project
-update in April 2018 and funding anticipated to continue until April 2021.
+update in April 2018 and with funding anticipated to continue until
+April 2021.  CanDIG is already supporting two national precision
+oncology projects, with additional projects being discussed as more
+and more projects have both privacy and national data availability
+needs, and we hope to continue to obtain development and maintenance
+funding beyond 2021.
 
-CanDIG is already supporting two national precision oncology projects,
-with additional projects being discussed as more and more projects
-have both privacy and national data availability needs, and we hope
-to continue to obtain development and maintenance funding beyond 2021.
+The CanDIG project will take over responsibility for software
+maintenance, extending and adding functionality, and outreach to
+new users.  The CanDIG project will also search for funding for
+hardware and operations support for CHORD sites, as well as pursuing
+other opportunities (for example, Compute Canada RPPs, although the
+publishing of significant amount of raw data would be in excess of
+what would normally be available).
 
+The individual CHORD sites will be responsible for their own
+operations, with the CanDIG project coordinating discussions between
+CHORD sites and developing shared policies and operational best
+practices.  User support will be provided first by the individual
+CHORD site.  CanDIG sites will stand up initial CHORD sites, likely
+for processed data only due to storage constraints.
 
 
 Intellectual Property
