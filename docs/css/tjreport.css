@@ -9,6 +9,9 @@ body {
 }
 h1, h2, table, tr, td, div, span {
 }
+h1:before {
+    background-image: url('./chord-sm.png');
+}
 table {
 }
 /* Treat images in tables as block and not line elements. This will

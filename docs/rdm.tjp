@@ -306,7 +306,7 @@ macro TaskTip [
 
 textreport frame "" {
   header -8<-
-    == CANARIE RDM Proposal: CanDIG National Genomic Data Service ==
+    == CanDIG CHORD: Canadian Health Omics Repository, Distributed ==
     <[navigator id="navbar"]>
   ->8-
   footer "----"
