@@ -1,15 +1,14 @@
-Scoring Criteria:
-=================
+# Scoring Criteria:
 
 > 1.  **What is the extent to which the project makes use of or
 >     contributes to digital research infrastructure?**
 
-CHORD builds on previous Canadian software, network, and computataional
+CHORD builds on previous Canadian software, network, and computational
 investments in digital research infrastructure (DRI), to enable a
 national data service for privacy-sensitive genomic and related
 health data.
 
-CHORD builds on previous software DRI investements by building a
+CHORD builds on previous software DRI investments by building a
 secure, privacy-preserving data back end which which the GenAP
 portal will be able to make use of enable analyses of private health
 data.
@@ -22,7 +21,7 @@ results.
 
 And the computational, storage, and personnel resources at the
 participating sites (MUQGIC, HPC4Health, and the BCGSC), will be
-the backbone on which initial CHORD servces are provided.
+the backbone on which initial CHORD services are provided.
 
 Those investments, combined with the services provided in the work
 described here, means that CHORD will a truly national data service
@@ -31,7 +30,7 @@ for privacy-sensitive genomics and related health data.
 > 2.  **What is the extent to which the project creates or contributes to
 >     a national data service?**
 
-CHORD will provide four key capabilites which would define a national data service
+CHORD will provide four key capabilities which would define a national data service
 for privacy-sensitive genomic health data.
 
 CHORD will:
@@ -61,15 +60,15 @@ and citability of Canadian genomic data by allowing it to be published
 with a globally unique and persistent identifier (principle F1).
 
 Availability for analysis has been a guiding principle of
-CanDIG services (via open, authorized protocals, A1.1, A1.2),
+CanDIG services (via open, authorized protocols, A1.1, A1.2),
 but accessibility (including, for instance, for download) _per se_ had
 not been a goal; similarly, data that was not available due whether
 due to loss or lack of authorization meant that the metadata was
 no longer visible.  CHORD will allow data downloads when so authorized
 (A1) and the &ldquo;Censored Discovery&rdquo; will always allow
-some degree of accessiblity of metadata (A2).
+some degree of accessibility of metadata (A2).
 
-Interoperability of data betwen similar projects with CanDIG services
+Interoperability of data between similar projects with CanDIG services
 is good, with recommended ontologies (I1, I2) and qualified references
 between metadata items or data items (I3), and reuse was enabled by
 strong community standards (R1.3), provenance information (R1.2), and 
@@ -91,11 +90,10 @@ to the development of standards, and participates in collaborations
 between other genomics projects such as Genomics England and the
 Australian Genomics Health Alliance.  CHORD will benefit from
 CanDIG's participation in GA4GH, ensuring that CHORD services
-developed are compatable with new and emerging standards and are
+developed are compatible with new and emerging standards and are
 built in collaboration with similar projects around the world.
 
-System Architecture 
-====================
+# System Architecture 
 
 ![System Infrastructure](../figures/CANARIE_RDM_Fig_1.png "Fig 1: System Infrastructyre")
 
@@ -164,7 +162,7 @@ with information on who to contact to request access.  This discovery
 service would also be made available via the GenAP portal, in
 collaboration with the GenAP team.
 
-To allow fine-grained availablity of data for analyses - for instance,
+To allow fine-grained availability of data for analyses - for instance,
 to allow aggregations of data to be computed even if researchers do
 not have access to row-level data - CHORD will also create new 
 capabilities for aggregations, including differential privacy, in
@@ -173,8 +171,7 @@ both variants and clinical and phenotypic searches (Activity 3.1).
 Also proposed are new services for RNA data, a rapidly growing area
 of genomic data (Activity 4.3).
 
-Software Architecture
-=====================
+# Software Architecture
 
 ![Software Infrastructure](../figures/CANARIE_RDM_Fig_2.png "Fig 2: Software Infrastructure")
 
@@ -223,11 +220,11 @@ Genomic data access by the external services does not directly
 interact with Minio, but with a Data Object Service (DOS), with an
 API being developed by the GA4GH.  All access to genomic data through
 this service - and to clinical/phenotypic metadata as well - must
-be authorized in a consistent and auditable fasion. CanDIG is
+be authorized in a consistent and auditable fashion. CanDIG is
 refactoring authorization out into a single service, managed by a
 policy engine [Casbin](http://casbin.org); in Activity 3.3, CHORD
 will extend this service to enable the wider range of finer-grained
-authorization needed for the broader range of data sets targetted
+authorization needed for the broader range of data sets targeted
 by CHORD.
 
 Externally facing services are being developed in an API-first
@@ -239,7 +236,7 @@ Services will be developed (and extended) in both Python and Go.
 Requests entering CHORD will pass through the API Gateway infrastructure
 developed by CanDIG, based on [Tyk](https://tyk.io), a feature-rich,
 highly-configurable open-source package deployable both as containers
-and on bare metal.  Authentication is performd by OpenID connect via
+and on bare metal.  Authentication is performed by OpenID connect via
 trusted Identity Providers; in Activity 2.2, CHORD will build on GenAP's
 work with the Canadian Access Federation to allow authentication into
 CanDIG services by the broader Canadian research community.
@@ -247,8 +244,7 @@ CanDIG services by the broader Canadian research community.
 Portals and other front ends (Activities 1.4.4, 2.1) will be developed
 with common web programming frameworks, in particular Reactjs.
 
-Software Development Summary
-============================
+# Software Development Summary
 
 > Please provide an overview of the proposed software development.
 > Your summary should:
@@ -259,14 +255,85 @@ Software Development Summary
 >
 > Max 750 words
 
-Future Customization and/or Extension of Functionality
-======================================================
+CHORD extends the services, data types, and capabilities provided
+by the CanDIG project to build a federated, Canadian, national data
+service for privacy-sensitive genomic and related health data.
+An API-first approach will be taken, with service APIs being defined
+in OpenAPI and OpenAPI ecosystem tooling being used for validation,
+testing, and implementation of servers and clients.
+
+CHORD software development is organized into four broad activities:
+Data Publishing, Findability and Access, Privacy-Preserving Reuse, and
+Expanded Health Data Support.
+
+In Activity 1, Data Publishing, an activity owned by the Hospital
+for Sick Children, the software infrastructure is built which would
+support the ingest, assignment of persistent identifiers, and
+publishing of a genomic and related health data.  In activity 1.1,
+CanDIG as an in-kind contribution will push forward the development
+of a currently prototype data backend which is not currently necessary
+for the projects CanDIG is supporting.  This back end is based on
+the well-used package Minio, which provides uniform object-store
+functionality across a variety of underlying storage types, wrapped
+by the Data Object Service, a service standard developed by the
+cloud work stream of the GA4GH.  Activity 1.2 consists of developing
+automated data normalization and quality control to be run upon uploading;
+Activity 1.3 consists of the generation of permanent identifiers and
+ingest of the normalized data if it passes QC; and Activity 1.4 consists
+of the API-driven development of the user-facing upload process, including
+a portal and forms/APIs for entering relevant clinical and phenotypic
+metadata.
+
+In Activity 2, Findability and Access, owned by lead contractor
+McGill, a data discovery portal (Activity 2.1) will be built which
+allows the user to discover data, including data that the user does
+not have access to (where possible and made discoverable by the
+data owner) but with information about how to find out more about
+authorization for that data set; we will work with the GenAP team
+to attempt to also make such data discovery services available
+through the GenAP portal.  In addition, Activity 2.2 will build on
+the GenAP team's growing experience with using CAF for authentication
+to authentication via CAF into CHORD services.
+
+In Activity 3, Privacy Preserving Reuse, owned by the BCGSC with
+participation by McGill with participation by BC, we will add
+finer-grained levels of authorization and privacy to the CHORD
+services.  In Activity 3.1, CHORD will add differentially private
+calculations of aggregations to the existing variants, and clinical
+and phenotypic, servers, allowing data stewards to not only restrict
+authorization to aggregate rather than row-level data, but to require
+the addition of noise.  In Activity 3.2, we will add the use of
+data use ontologies (such as the [Automatable Discovery and Access
+Matrix (ADA-M)](https://github.com/ga4gh/ADA-M)) for describing
+allowable data use, reflecting patient and data steward consents,
+and make this feature available in discovery APIs.  In Activity
+3.3, CanDIG will again contribute in-kind development effort by
+pushing forward the deployment of a authorization policy engine
+based on Casbin, allow finer-grained authorization than currently
+needed by the CanDIG project, to allow the requirement of aggregation,
+differentially private aggregation, and data use matching.  Finally,
+usage logs will be made available to data owners in Activity 3.4.
+
+Activity 4, Expanded Health Data Support, owned by McGill, will
+address the wider range of data types that CHORD users will need
+over what CanDIG currently supplies for its driver projects. 
+Activity 4.1 will add to the current clinical and phenotypic metadata
+server by expanding the data model and API to include FHIR resources
+for Observations and Measurements, greatly expanding the range of
+patient data that can be stored.  Links to external data sources
+such as imaging data will be added to the metadata server in Activity
+4.2; and emerging standards for increasingly important RNA data will
+be developed into new services in Activity 4.3.  To better incorporate
+the addition of these services into CHORD, CanDIG will accelerate the
+development of and contribute its integrated testing harness to
+the CHORD project.
+
+# Future Customization and/or Extension of Functionality
 
 The CHORD design is targetted towards a rapidly evolving genomics
-and health data environment.
-CHORD's service-oriented architecture is designed to enable future
-scale out, along dimensions of data volumes, data types, and data
-services.
+and health data environment.  CHORD's service-oriented architecture
+is designed to enable future scale out, along dimensions of data
+volumes, data types, and data services.
 
 By separating the data persistance layer from the data services,
 having individual data services contained within their own tools,
@@ -286,5 +353,3 @@ for breaking changes.
 Similarly, abstracting the workflow execution and genomic data store
 behind existing tooling like Cromwell or Minio allows us the
 flexibility to deploy on a wide variety of systems and system types.
-
-
