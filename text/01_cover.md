@@ -11,8 +11,7 @@ CanDIG CHORD: Canadian Health Omics Repository, Distributed
 
 McGill University
 
-Project Summary
-===============
+# Project Summary
 
 Tackling the &ldquo;wicked problems&rdquo; of cancer and rare
 diseases against the already complex landscape of human biology
@@ -108,8 +107,7 @@ extending authentication beyond the original CanDIG sites to include
 the Canadian Access Federation.
 
 
-Lead Contractor
-===============
+# Lead Contractor
 
   **Lead Contractor**
   ----------------------------------- --------------------------------------------------------------
@@ -176,8 +174,7 @@ experience, expertise and qualifications.
 Append a short bio (maximum one \[1\] page) summarizing relevant
 experience, expertise and qualifications.
 
-Participants 
-=============
+# Participants 
 
 **Note:**
 

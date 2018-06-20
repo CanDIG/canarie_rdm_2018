@@ -1,5 +1,5 @@
-Project Plan
-============
+# Project Plan
+
 
 **KEY TASKS LIST**
 
@@ -37,8 +37,7 @@ Gantt Chart available at http://candig.github.io/canarie_rdm_2018/Overview.html
                                                 
                                                 
 
-Risk Assessment and Mitigation Plan
-===================================
+# Risk Assessment and Mitigation Plan
 
 **Risk Assessment: Development: Unforseen development complexity**
 **Mitigation**: The CHORD software plan has been developed to consist
@@ -123,8 +122,7 @@ synthetic or open data before used in production with private data.
 And all breaches of any kind will be reported following both the
 reporting mechanisms of the site(s) in question, and the GA4GH.
 
-Software Provenance
-===================
+# Software Provenance
 
 The owner of the integrated testing harness, Pierre-Olivier Quirion
 at McGill, will be the release manager for the CHORD package as a
@@ -150,8 +148,7 @@ New major releases that introduce breaking changes will be planned
 for in advance of the official release of the upstream package, and
 adaption and strategies developed.
 
-Testing Plan
-============
+# Testing Plan
 
 The CanDIG project uses Travis-CI to perform unit testing of its
 individual components, and as the number of services increases, is
@@ -172,8 +169,7 @@ release manager.  Integration testing will be a requirement for all
 new releases both of the individual components and of the CHORD suite
 of services as a whole. 
 
-User Training Plan
-==================
+# User Training Plan
 
 Users of CHORD software will include both end users, and systems staff
 looking to stand up new CHORD sites.
@@ -192,8 +188,8 @@ on the installation and maintenance of new CHORD sites will be more
 occurring both on-site and online as necessary for those who express
 interest.
 
-Maintenance and Support Plan
-============================
+# Maintenance and Support Plan
+
 
 CHORD services will be integrated into CanDIG, a four-year CFI
 cyberinfrastructure project which completed its first annual project
@@ -219,9 +215,7 @@ practices.  User support will be provided first by the individual
 CHORD site.  CanDIG sites will stand up initial CHORD sites, likely
 for processed data only due to storage constraints.
 
-
-Intellectual Property
-=====================
+# Intellectual Property
 
 The intellectual property developed by the CHORD project will consist
 of copyrights.  The standard license for CHORD software will be the

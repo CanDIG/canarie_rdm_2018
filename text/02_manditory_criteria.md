@@ -1,5 +1,4 @@
-Mandatory Criteria:
-===================
+# Mandatory Criteria:
 
 CHORD is a project to build a federated, Canadian, national data
 service for privacy-sensitive genomic and related health data.
